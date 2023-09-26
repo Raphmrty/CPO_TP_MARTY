@@ -1,0 +1,37 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package manipnombresint;
+
+import java.util.Scanner;
+
+/**
+ * groupe : TDC
+ * Nom : MARTY
+ * @author marty
+ * rôle du programme : TP1_maniNombresInt
+ * Date : 26/09/23
+ */
+public class ManipNombresInt {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner sc;
+        sc = new Scanner(System.in);
+        System.out.println("Saisissez un premier nombre entier");
+        System.out.println("Saisissez un deuxieme nombre entier");
+        int entier1 = sc.nextInt();
+        int entier2 = sc.nextInt();
+        int produit = entier1*entier2;
+        int difference = entier1 - entier2;
+        int somme = entier1 + entier2;
+        int quotient = entier1 / entier2;
+        int reste = entier1 % entier2;
+        System.out.println("La somme des deux entiers est : " + somme + " La difference des deux entiers est : " + difference + " Le produit des deux entiers est : " + produit );
+        System.out.println("Le quotient entier est : " + quotient + " Le reste de la division euclidienne est : " + reste );
+    }
+    
+}
