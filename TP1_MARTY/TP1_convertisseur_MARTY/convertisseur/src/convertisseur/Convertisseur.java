@@ -21,14 +21,33 @@ public class Convertisseur {
     public static void main(String[] args) {
         Scanner sc;
         sc = new Scanner(System.in);
-        System.out.println("Saisissez une valeur de temperature");
+        System.out.println("Bonjour, Saisissez une valeur : ");
         double temperature = sc.nextDouble();
-        System.out.println("La convertion de la temperature en degre celcius en degre kelvin donne : " + CelciusVersKelvin (temperature) + " K " );
-        System.out.println("La convertion de la temperature en degre kelvin en degre celcius donne : " + KelvinVersCelcius (temperature) + " C ");
-        System.out.println("La convertion de la temperature en degre farenheit en degre celcius donne : " + FarenheitVersCelcius (temperature) + " C ");
-        System.out.println("La convertion de la temperature en degre celcius en degre farenheit donne : " + CelciusVersFarenheit (temperature) + " F ");
-        System.out.println("La convertion de la temperature en degre kelvin en degre farenheit donne : " + KelvinVersFarenheit (temperature) + " F ");
-        System.out.println("La convertion de la temperature en degre farenheit en degre kelvin donne : " + FarenheitVersKelvin (temperature) + " K ");
+        System.out.println("Saisissez la conversion que vous souhaitez effectuer : " );
+        System.out.println("1) De Celcius vers Kelvin ");
+        System.out.println("2) De Kelvin vers Celcius ");
+        System.out.println("3) De Farenheit vers Celcius ");
+        System.out.println("4) De Celcius vers Farenheit ");
+        System.out.println("5) De Kelvin vers Farenheit ");
+        System.out.println("6) De Farenheit vers Kelvin");
+        int operateur = sc.nextInt();
+        if (operateur < 1 || operateur > 6) {
+            System.out.println("Syntaxe invalide. Veuillez choisir un chiffre entre 1 et 6 : ");
+            return; // Exit the program
+        }
+        if (operateur == 1) {
+            System.out.println(temperature + " degre Celcius est egal a  " + CelciusVersKelvin (temperature) + " degre Kelvin " );
+        } else if (operateur == 2) {
+            System.out.println(temperature + " degre Kelvin est egal a " + KelvinVersCelcius (temperature) + " degre Celcius ");
+        } else if (operateur == 3) {
+            System.out.println(temperature + " degre Farenheit est egal a " + FarenheitVersCelcius (temperature) + " degre Celcius ");
+        } else if (operateur == 4) {
+            System.out.println(temperature + " degre Celcius est egal a  " + CelciusVersFarenheit (temperature) + " degre Farenheit ");
+        } else if (operateur == 5) {
+            System.out.println(temperature + " degre Kelvin est egal a  " + KelvinVersFarenheit (temperature) + " degre Farenheit ");
+        } else if (operateur == 6) {
+        System.out.println(temperature + " degre Farenheit est egal a  " + FarenheitVersKelvin (temperature) + " degre Kelvin ");
+        }
     }
     public static double CelciusVersKelvin (double tCelcius) {
         return (tCelcius + 273.15);
@@ -48,4 +67,6 @@ public class Convertisseur {
     public static double FarenheitVersKelvin (double tFarenheit) {
         return (FarenheitVersCelcius(CelciusVersKelvin(tFarenheit)));
     }
+    
 }
+
