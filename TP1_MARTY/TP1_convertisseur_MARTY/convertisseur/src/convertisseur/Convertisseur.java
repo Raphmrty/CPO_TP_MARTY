@@ -21,20 +21,21 @@ public class Convertisseur {
     public static void main(String[] args) {
         Scanner sc;
         sc = new Scanner(System.in);
-        System.out.println("Bonjour, Saisissez une valeur : ");
+        System.out.println("Bonjour, Saisissez une valeur : "); //demande de saisie d'une température à l'utilisateur
         double temperature = sc.nextDouble();
-        System.out.println("Saisissez la conversion que vous souhaitez effectuer : " );
+        System.out.println("Saisissez la conversion que vous souhaitez effectuer : " ); // l'utilisateur peut choisir entre 6 types de conversion
         System.out.println("1) De Celcius vers Kelvin ");
         System.out.println("2) De Kelvin vers Celcius ");
         System.out.println("3) De Farenheit vers Celcius ");
         System.out.println("4) De Celcius vers Farenheit ");
         System.out.println("5) De Kelvin vers Farenheit ");
         System.out.println("6) De Farenheit vers Kelvin");
-        int operateur = sc.nextInt();
+        int operateur = sc.nextInt(); // variable de saisie des modes de conversion
         if (operateur < 1 || operateur > 6) {
-            System.out.println("Syntaxe invalide. Veuillez choisir un chiffre entre 1 et 6 : ");
+            System.out.println("Syntaxe invalide. Veuillez choisir un chiffre entre 1 et 6 : "); // Si l'utilisateur n'écrit pas un chiffre entre 1 et 6, il est invité à réessayer
             return; // Exit the program
         }
+        // selon le mode de conversion choisi, cela affiche à l'écran la conversion
         if (operateur == 1) {
             System.out.println(temperature + " degre Celcius est egal a  " + CelciusVersKelvin (temperature) + " degre Kelvin " );
         } else if (operateur == 2) {
@@ -48,6 +49,7 @@ public class Convertisseur {
         } else if (operateur == 6) {
         System.out.println(temperature + " degre Farenheit est egal a  " + FarenheitVersKelvin (temperature) + " degre Kelvin ");
         }
+    // fonctions permettant de convertir d'une unité de température à une autre
     }
     public static double CelciusVersKelvin (double tCelcius) {
         return (tCelcius + 273.15);
