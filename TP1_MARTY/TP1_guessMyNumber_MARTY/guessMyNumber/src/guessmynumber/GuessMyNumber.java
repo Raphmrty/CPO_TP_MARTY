@@ -13,7 +13,9 @@ package guessmynumber;
  */
 import java.util.Random;
 import java.util.Scanner;
+
 public class GuessMyNumber {
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Choisissez un niveau de difficulté :");
@@ -30,11 +32,14 @@ public class GuessMyNumber {
 
         if (choixDifficulte == 1) {
             max = 50;
-            messagePetit = "Vraiment trop petit.";
-            messageGrand = "Vraiment trop grand.";
+            messagePetit = "Vraiment trop petit. ";
+            messageGrand = "Vraiment trop grand. ";
+        } else if (choixDifficulte == 2) {
+            messagePetit = "Trop petit. ";
+            messageGrand = "Trop grand. ";
         } else if (choixDifficulte == 3) {
             nombreMaxTentatives = 10; // Par exemple, limite de 10 tentatives en mode difficile
-        }
+        } 
 
         Random generateurAleat = new Random();
         int n = generateurAleat.nextInt(max) + min;
@@ -42,26 +47,24 @@ public class GuessMyNumber {
 
         int valeur;
         int tentatives = 0;
-
+        // boucle qui effectue la demande à l'utilisateur jusqu'à ce qu'il soit tombé sur le bon nombre
         do {
-            tentatives++;
+            tentatives++; // variable qui stocke le nombre d'essai réalisé par l'utilisateur
             valeur = sc.nextInt();
-
+            // à l'intérieur de la boucle, il y a trois comparaisons possibles à chaque tour
             if (valeur == n) {
-                System.out.println("Gagné en " + tentatives + " tentatives !");
+                System.out.println("Gagne en " + tentatives + " tentatives !");
             } else if (valeur < n) {
-                System.out.println(messagePetit + " Essayez à nouveau : ");
+                System.out.println(messagePetit + " Essayez a nouveau : ");
             } else {
-                System.out.println(messageGrand + " Essayez à nouveau : ");
+                System.out.println(messageGrand + " Essayez a nouveau : ");
             }
 
-        } while (valeur != n && tentatives < nombreMaxTentatives);
+        } while (valeur != n && tentatives < nombreMaxTentatives); // cette condition cercerne surtout le mode difficile qui précise un nombre d'essai maximum
 
         if (valeur != n) {
-            System.out.println("Vous avez épuisé toutes vos tentatives. Le nombre était : " + n);
+            System.out.println("Vous avez épuisé toutes vos tentatives. Le nombre était : " + n); // message en cas de nombre "non trouvé" au dessus du nombre de tentatives autorisées 
         }
-
-        sc.close();
     }
 }
 
