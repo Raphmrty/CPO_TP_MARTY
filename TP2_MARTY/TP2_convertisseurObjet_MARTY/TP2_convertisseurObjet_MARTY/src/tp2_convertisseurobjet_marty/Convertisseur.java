@@ -18,23 +18,26 @@ public class Convertisseur {
 
     public Convertisseur() {
         nbConversions = 0;
-        nbConversions++;
     }
 
     public double CelciusVersKelvin (double tCelcius) {
+        ++nbConversions;
         return (tCelcius + 273.15);
-        
     }
     public double KelvinVersCelcius (double tKelvin) {
+        ++nbConversions;
         return (tKelvin - 273.15);
     }
     public double FarenheitVersCelcius (double tFarenheit) {
+        ++nbConversions;
         return ((tFarenheit-32)*5.0/9);
     }
     public double CelciusVersFarenheit (double tCelcius) {
+        ++nbConversions;
         return ((tCelcius*1.8)+32);
     }
     public double KelvinVersFarenheit (double tKelvin) {
+  
         return (KelvinVersCelcius(CelciusVersFarenheit(tKelvin)));
     }
     public double FarenheitVersKelvin (double tFarenheit) {
