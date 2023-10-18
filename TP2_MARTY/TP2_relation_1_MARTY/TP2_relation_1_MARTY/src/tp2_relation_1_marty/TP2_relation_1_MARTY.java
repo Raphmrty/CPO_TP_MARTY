@@ -5,8 +5,12 @@
 package tp2_relation_1_marty;
 
 /**
- *
+ *groupe : TDC
+ * Nom : MARTY
  * @author marty
+ * rôle du programme : TP2_relation_1
+ * Date : 06/10/23
+ * 
  */
 public class TP2_relation_1_MARTY {
 
