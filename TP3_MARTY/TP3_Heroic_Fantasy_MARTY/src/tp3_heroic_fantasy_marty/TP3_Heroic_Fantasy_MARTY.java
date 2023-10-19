@@ -7,6 +7,7 @@ package tp3_heroic_fantasy_marty;
 
 import java.util.ArrayList;
 import Armes.*;
+import Personnages.*;
 
 /**
  *groupe : TDC
@@ -37,19 +38,19 @@ public class TP3_Heroic_Fantasy_MARTY {
         armes.add(Chene);
         armes.add(Charme);
 
-        // Parcourez le tableau et affichez les caractéristiques des armes
-        for (Arme arme : armes) {
-            System.out.println("Nom : " + arme.getNom());
-            System.out.println("Niveau d'attaque : " + arme.getNiveauAttaque());
-            if (arme instanceof Epee) {
-                Epee epee = (Epee) arme;
-                System.out.println("Finesse de l'epee : " + epee.getFinesse());
-            } else if (arme instanceof Baton) {
-                Baton baton = (Baton) arme;
-                System.out.println("Age du baton : " + baton.getAge());
-            }
-            System.out.println();
-        }
+        System.out.println(armes);
+        
+        Magicien Gandalf = new Magicien("Gandalf",65,true);
+        Magicien Garcimore = new Magicien("Garcimore",44,false);
+        Guerrier Conan = new Guerrier("Conan",78,false);
+        Guerrier Lannister = new Guerrier("Lanister",45,true);
+        
+        ArrayList<Personnages> perso = new ArrayList<Personnages>();
+        perso.add(Gandalf);
+        perso.add(Garcimore);
+        perso.add(Conan);
+        perso.add(Lannister);
+        
     }
 }
         
