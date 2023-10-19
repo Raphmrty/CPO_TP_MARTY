@@ -31,18 +31,18 @@ package Personnages;
     public String toString() {
         if (this.Arme_en_main == null) {
             if (cheval == true) {
-                return "Guerrier "+ nom + " (" + hp + " points de vie), à cheval";
+                return "Guerrier "+ nom + " (" + hp + " points de vie), a cheval";
             }
             else {
-                return "Guerrier "+ nom + " (" + hp + " points de vie), à pieds";
+                return "Guerrier "+ nom + " (" + hp + " points de vie), a pieds";
             }
         }
         else {
             if (cheval == true) {
-                return "Guerrier "+ nom + " (" + hp + " points de vie), à cheval est équipé de "+ Arme_en_main;
+                return "Guerrier "+ nom + " (" + hp + " points de vie), a cheval est equipe de "+ Arme_en_main;
             }
             else {
-                return "Guerrier "+ nom + " (" + hp + " points de vie), à pieds est équipé de " + Arme_en_main;
+                return "Guerrier "+ nom + " (" + hp + " points de vie), a pieds est equipe de " + Arme_en_main;
             }
         }
     }

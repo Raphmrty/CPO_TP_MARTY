@@ -31,7 +31,7 @@ public class Magicien extends Personnages {
     public String toString() {
         if (this.Arme_en_main == null) {
             if (conf == true) {
-                return "Magicien "+ nom + " (" + hp + " points de vie), confirmé";
+                return "Magicien "+ nom + " (" + hp + " points de vie), confirme";
             }
             else {
                 return "Magicien "+ nom + " (" + hp + " points de vie), novice";
@@ -39,10 +39,10 @@ public class Magicien extends Personnages {
         }
         else {
             if (conf == true) {
-                return "Magicien "+ nom + " (" + hp + " points de vie), confirmé est équipé de "+ Arme_en_main;
+                return "Magicien "+ nom + " (" + hp + " points de vie), confirme est equipe de "+ Arme_en_main;
             }
             else {
-                return "Magicien "+ nom + " (" + hp + " points de vie), novice est équipé de " + Arme_en_main;
+                return "Magicien "+ nom + " (" + hp + " points de vie), novice est equipe de " + Arme_en_main;
             }
         }
     }

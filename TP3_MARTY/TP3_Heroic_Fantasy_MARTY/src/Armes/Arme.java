@@ -50,8 +50,15 @@ public abstract class Arme {
     @Override
     public String toString() {
         String chaine_a_retourner = nom + " (" + nivAtq + " points d'attaque)";
+        if (this instanceof Epee) {
+            Epee epee = (Epee) this;
+            chaine_a_retourner += " - Finesse : " + epee.getFinesse();
+        } else if (this instanceof Baton) {
+            Baton baton = (Baton) this;
+            chaine_a_retourner += " - Age : " + baton.getAge();
+        }
         if (proprietaire != null) {
-            chaine_a_retourner += " - Propriétaire : " + proprietaire.getNom();
+            chaine_a_retourner += " - Proprietaire : " + proprietaire.getNom();
         }
         return chaine_a_retourner;
     }

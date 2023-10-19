@@ -18,9 +18,19 @@ import java.util.ArrayList;
 public abstract class Personnages {
     String nom;
     int hp;
+    String typePredilection;
     ArrayList<Arme> inventaire = new ArrayList<Arme>();
     Arme Arme_en_main = null;
     public static int nbPersos;
+
+    public Personnages(String nom, int hp) {
+        this.nom = nom;
+        this.hp = hp;
+        nbPersos++;
+    }
+    public String getNom() {
+        return nom;
+    }
 
     public int getHp() {
         return hp;
@@ -34,9 +44,9 @@ public abstract class Personnages {
         if (inventaire.size() < 5) {
             this.inventaire.add(Arme_a_ajouter);
             Arme_a_ajouter.setProprietaire(this);
-            System.out.println(Arme_a_ajouter.getNom() + " a bien été ajoutée à l'inventaire de " + this.nom);
+            System.out.println(Arme_a_ajouter.getNom() + " a bien ete ajoutee a l'inventaire de " + this.nom);
         } else {
-            System.out.println(this.nom + " possède déjà 5 armes dans son inventaire.");
+            System.out.println(this.nom + " possede deja 5 armes dans son inventaire.");
         }
     }
 
@@ -44,12 +54,13 @@ public abstract class Personnages {
         for (Arme arme : inventaire) {
             if (arme.getNom().equals(nomArme)) {
                 Arme_en_main = arme;
-                System.out.println(this.nom + " a équipé " + arme.getNom() + " comme arme principale.");
+                System.out.println(this.nom + " a equipe " + arme.getNom() + " comme arme principale.");
                 return;
             }
         }
-        System.out.println(this.nom + " ne possède pas d'arme nommée " + nomArme + " dans son inventaire.");
+        System.out.println(this.nom + " ne possede pas d'arme nommee " + nomArme + " dans son inventaire.");
     }
+    
 
     @Override
     public String toString() {

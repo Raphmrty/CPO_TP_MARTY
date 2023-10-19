@@ -51,6 +51,47 @@ public class TP3_Heroic_Fantasy_MARTY {
         perso.add(Conan);
         perso.add(Lannister);
         
+        System.out.println(perso);
+        
+        Magicien Merlin = new Magicien("Merlin", 90, true);
+        Guerrier Legolass = new Guerrier("Legolass", 85, false);
+        Epee Carte = new Epee("Carte", 40, 1);
+        Epee Epéeendiamant = new Epee("Epee en diamant", 80, 50);
+        Epee Epéeenor = new Epee("Epee en or", 60, 40);
+        Baton Massue = new Baton("Massue", 30, 10);
+        Baton Battedebaseball = new Baton("Batte de baseball", 35, 5);
+        Baton BatonMagique = new Baton("Baton magique", 90, 50);
+        
+        // Création des 6 armes et des 2 personnages
+        
+        Merlin.Ajouter_Arme(Carte);
+        Merlin.Ajouter_Arme(Massue);
+        Merlin.Ajouter_Arme(BatonMagique);
+        
+        Legolass.Ajouter_Arme(Epéeendiamant);
+        Legolass.Ajouter_Arme(Epéeenor);
+        Legolass.Ajouter_Arme(Battedebaseball);
+        
+        // Ajout des armes aux personnages
+        
+        Merlin.Equiper_Arme("Massue");
+        Legolass.Equiper_Arme("Epee en diamant");
+        
+        // Equipement des armes
+        
+        System.out.println(Merlin);
+        System.out.println(Legolass);
+        
+        // Affichage des personnages
+       
+        
+        
+        
+        System.out.println("Il y a " + Magicien.nbMagiciens + " magiciens");
+        System.out.println("Il y a " + Guerrier.nbGuerriers + " guerriers");
+        System.out.println("Il y a " + Personnages.nbPersos + " personnages");
+        
+        /// On a bien le bon nombre de magiciens, guerriers et personnages crées
     }
 }
         
