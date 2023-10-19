@@ -4,6 +4,8 @@
  */
 package Personnages;
 import Armes.*;
+import static Personnages.Guerrier.nbGuerriers;
+import static Personnages.Magicien.nbMagiciens;
 import java.util.ArrayList;
 /**
  *groupe : TDC
@@ -15,19 +17,52 @@ import java.util.ArrayList;
  */
 import java.util.ArrayList;
 
-public abstract class Personnages {
+public abstract class Personnages implements etreVivant {
     String nom;
     int hp;
-    String typePredilection;
     ArrayList<Arme> inventaire = new ArrayList<Arme>();
     Arme Arme_en_main = null;
     public static int nbPersos;
+    public static int nbTotalPersonnages = 0;
+    public static int nbGuerriers = 0;
+    public static int nbMagiciens = 0;
+    
+    public void seFatiguer() {
+        // Tous les personnages perdent 10 points de vie lorsqu'ils se fatiguent
+        hp -= 10;
+    }
 
-    public Personnages(String nom, int hp) {
+    public boolean estVivant() {
+        // Un personnage est vivant s'il a des points de vie positifs
+        return hp > 0;
+    }
+
+    public void estAttaque(int points) {
+        // Un personnage perd des points de vie lorsqu'il est attaqué
+        hp -= points;
+    }
+
+    public Personnages (String nom, int hp) {
         this.nom = nom;
         this.hp = hp;
         nbPersos++;
+        // Mettre à jour le compteur total de personnages
+        nbTotalPersonnages++;
+
+        // Mettre à jour le compteur de guerriers et de magiciens (ajoutez d'autres types si nécessaire)
+        if (this instanceof Guerrier) {
+            nbGuerriers++;
+        } else if (this instanceof Magicien) {
+            nbMagiciens++;
+        }
+        
     }
+    public void finalize(){
+    nbPersos = nbPersos - 1;
+    nbMagiciens = nbMagiciens - 1;
+    nbGuerriers = nbGuerriers - 1;
+}
+    
     public String getNom() {
         return nom;
     }
