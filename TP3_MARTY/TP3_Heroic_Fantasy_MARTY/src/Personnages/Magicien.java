@@ -4,6 +4,7 @@
  */
 package Personnages;
 
+
 /**
  *groupe : TDC
  * Nom : MARTY
@@ -25,8 +26,21 @@ public class Magicien extends Personnages {
     
     public void finalize(){
     nbMagiciens = nbMagiciens - 1;
-}
-
+}   @Override
+    public void estAttaque(int points) {
+        hp = points;
+        hp = hp-30;
+    }
+    @Override
+    public void seFatiguer() {
+        // Tous les personnages perdent 10 points de vie lorsqu'ils se fatiguent
+        hp -= 10;
+    }
+    @Override
+    public boolean estVivant() {
+        // Un personnage est vivant s'il a des points de vie positifs
+        return hp > 0;
+    }
     @Override
     public String toString() {
         if (this.Arme_en_main == null) {
@@ -46,4 +60,6 @@ public class Magicien extends Personnages {
             }
         }
     }
+
+    
 }

@@ -7,6 +7,7 @@ import Armes.*;
 import static Personnages.Guerrier.nbGuerriers;
 import static Personnages.Magicien.nbMagiciens;
 import java.util.ArrayList;
+import tp3_heroic_fantasy_marty.etreVivant;
 /**
  *groupe : TDC
  * Nom : MARTY
@@ -27,20 +28,7 @@ public abstract class Personnages implements etreVivant {
     public static int nbGuerriers = 0;
     public static int nbMagiciens = 0;
     
-    public void seFatiguer() {
-        // Tous les personnages perdent 10 points de vie lorsqu'ils se fatiguent
-        hp -= 10;
-    }
-
-    public boolean estVivant() {
-        // Un personnage est vivant s'il a des points de vie positifs
-        return hp > 0;
-    }
-
-    public void estAttaque(int points) {
-        // Un personnage perd des points de vie lorsqu'il est attaqué
-        hp -= points;
-    }
+    
 
     public Personnages (String nom, int hp) {
         this.nom = nom;
