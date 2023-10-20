@@ -89,8 +89,39 @@ public class TP3_Heroic_Fantasy_MARTY {
         System.out.println("Il y a " + Personnages.nbPersos + " personnages");
         
         /// On a bien le bon nombre de magiciens, guerriers et personnages crées
+        
+      
+        // 54. Créer un magicien et un guerrier
+        Magicien Loard = new Magicien("Loard", 100,false);
+        Guerrier Arthur = new Guerrier("Arthur", 150,true);
+
+        // Afficher leurs caractéristiques
+        System.out.println("Caracteristiques de Loard (Magicien): " + Loard);
+        System.out.println("Caracteristiques d'Arthur (Guerrier): " + Arthur);
+
+        // Afficher le nombre de personnages, de guerriers et de magiciens
+        System.out.println("Nombre de personnages crees: " + Personnages.nbPersos);
+        System.out.println("Nombre de guerriers crees: " + Guerrier.nbGuerriers);
+        System.out.println("Nombre de magiciens crees: " + Magicien.nbMagiciens);
+
+        // 55. Fatiguez le guerrier
+        Arthur.seFatiguer();
+
+        // 56. Afficher les caractéristiques du guerrier et vérifier s'il est toujours vivant
+        System.out.println("Caracteristiques d'Arthur apres s'etre fatigue: " + Arthur);
+        System.out.println("Arthur est vivant : " + Arthur.estVivant());
+
+        // 57. Faire en sorte que le magicien soit victime d'une attaque de la part du guerrier
+        Loard.estAttaque(100);
+
+        // Afficher leurs caractéristiques après l'attaque
+        System.out.println("Caracteristiques de Loard apres l'attaque d'Arthur: " + Loard);
+        System.out.println("Caracteristiques d'Arthur apres avoir attaque Loard: " + Arthur);
     }
 }
+
+    
+
         
         
     
