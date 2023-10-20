@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Personnages;
+import Armes.*;
 
 
 /**
@@ -29,7 +30,7 @@ public class Magicien extends Personnages {
 }   @Override
     public void estAttaque(int points) {
         hp = points;
-        hp = hp-30;
+        hp -= 30;
     }
     @Override
     public void seFatiguer() {
@@ -41,6 +42,26 @@ public class Magicien extends Personnages {
         // Un personnage est vivant s'il a des points de vie positifs
         return hp > 0;
     }
+   
+    
+    public void attaquer(Personnages cible, Arme armeUtilisee) {
+    int degats = armeUtilisee.getNiveauAttaque();
+
+    if (this instanceof Magicien && armeUtilisee instanceof Baton) {
+        // Si le personnage est un magicien et qu'il utilise un bâton, multipliez les dégâts par l'âge du bâton
+        degats *= ((Baton) armeUtilisee).getAge();
+        seFatiguer();
+    }
+    // Vérifiez si le magicien est confirmé 
+    if (conf==true) {
+        degats /= 2;
+    }
+
+    // Appliquez les dégâts à la cible
+    cible.estAttaque(degats);
+    
+    }
+
     @Override
     public String toString() {
         if (this.Arme_en_main == null) {

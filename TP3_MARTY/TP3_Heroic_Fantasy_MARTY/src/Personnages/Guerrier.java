@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Personnages;
+import Armes.*;
 
 
 /**
@@ -17,6 +18,7 @@ package Personnages;
     boolean cheval;
     public static int nbGuerriers;
     
+    
 
     public Guerrier(String nom, int hp, boolean chevaL) {
         super(nom, hp);
@@ -30,10 +32,9 @@ package Personnages;
     @Override
     public void estAttaque(int points) {
         hp = points;
-        hp = hp-20;
-        
-        
+        hp -= 20;  
     }
+    
     @Override
     public void seFatiguer() {
         // Tous les personnages perdent 10 points de vie lorsqu'ils se fatiguent
@@ -44,7 +45,23 @@ package Personnages;
         // Un personnage est vivant s'il a des points de vie positifs
         return hp > 0;
     }
-    
+    public void attaquer(Personnages cible, Arme armeUtilisee) {
+    int degats = armeUtilisee.getNiveauAttaque();
+
+    if (this instanceof Guerrier && armeUtilisee instanceof Epee) {
+        // Si le personnage est un guerrier et qu'il utilise une épée, multipliez les dégâts par la finesse de l'épée
+        degats *= ((Epee) armeUtilisee).getFinesse();
+        seFatiguer();
+    }
+
+    // Vérifiez si le magicien est confirmé ou si le guerrier est à cheval
+    if (cheval==true) {
+        degats /= 2;
+    }
+
+    // Appliquez les dégâts à la cible
+    cible.estAttaque(degats);
+    }
     @Override
     public String toString() {
         if (this.Arme_en_main == null) {

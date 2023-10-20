@@ -24,21 +24,18 @@ public class TP3_Heroic_Fantasy_MARTY {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Epee Excalibur = new Epee("Excalibur",7,5);
-        Epee Durandal = new Epee("Durandal",4,7);
-        Baton Chene = new Baton("Chene",4,5);
-        Baton Charme = new Baton("Charme",5,6);
+        
         
         // Créez un tableau dynamique pour stocker les armes
-        ArrayList<Arme> armes = new ArrayList<Arme>();
+        //ArrayList<Arme> armes = new ArrayList<Arme>();
 
         // Ajoutez les épées et les bâtons au tableau
-        armes.add(Excalibur);
-        armes.add(Durandal);
-        armes.add(Chene);
-        armes.add(Charme);
+        //armes.add(Excalibur);
+        //armes.add(Durandal);
+        //armes.add(Chene);
+        //armes.add(Charme);
 
-        System.out.println(armes);
+        //System.out.println(armes);
         
         Magicien Gandalf = new Magicien("Gandalf",65,true);
         Magicien Garcimore = new Magicien("Garcimore",44,false);
@@ -117,7 +114,29 @@ public class TP3_Heroic_Fantasy_MARTY {
         // Afficher leurs caractéristiques après l'attaque
         System.out.println("Caracteristiques de Loard apres l'attaque d'Arthur: " + Loard);
         System.out.println("Caracteristiques d'Arthur apres avoir attaque Loard: " + Arthur);
+        
+        Epee Excalibur = new Epee("Excalibur",7,5);
+        Epee Durandal = new Epee("Durandal",4,7);
+        Baton Chene = new Baton("Chene",4,5);
+        Baton Charme = new Baton("Charme",5,6);
+        Magicien Osiris = new Magicien("Osiris",160,false);
+        Guerrier Jean = new Guerrier("Jean",150,true);
+        Osiris.Ajouter_Arme(Chene);
+        Osiris.Ajouter_Arme(Charme);
+        Osiris.Equiper_Arme("Chene");
+        Jean.Ajouter_Arme(Excalibur);
+        Jean.Ajouter_Arme(Durandal);
+        Jean.Equiper_Arme("Excalibur");
+        Osiris.attaquer(Jean,Chene );
+        System.out.println("Caracteristiques d'Osiris (Magicien): " + Osiris);
+        System.out.println("Caracteristiques de Jean (Guerrier): " + Jean);
+        Jean.attaquer(Osiris, Excalibur);
+        System.out.println("Caracteristiques d'Osiris (Magicien): " + Osiris);
+        System.out.println("Caracteristiques de Jean (Guerrier): " + Jean);
+        Osiris.estVivant();
+        Jean.estVivant();
     }
+    
 }
 
     

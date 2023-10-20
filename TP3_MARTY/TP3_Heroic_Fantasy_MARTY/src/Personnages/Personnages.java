@@ -62,6 +62,16 @@ public abstract class Personnages implements etreVivant {
     public void setHp(int hp) {
         this.hp = hp;
     }
+    @Override
+    public void seFatiguer() {
+        // Tous les personnages perdent 10 points de vie lorsqu'ils se fatiguent
+        hp -= 10;
+    }
+    @Override
+    public boolean estVivant() {
+        // Un personnage est vivant s'il a des points de vie positifs
+        return hp > 0;    
+    }
 
     public void Ajouter_Arme(Arme Arme_a_ajouter) {
         if (inventaire.size() < 5) {
@@ -83,7 +93,7 @@ public abstract class Personnages implements etreVivant {
         }
         System.out.println(this.nom + " ne possede pas d'arme nommee " + nomArme + " dans son inventaire.");
     }
-    
+
 
     @Override
     public String toString() {
