@@ -29,8 +29,7 @@ public class Magicien extends Personnages {
     nbMagiciens = nbMagiciens - 1;
 }   @Override
     public void estAttaque(int points) {
-        hp = points;
-        hp -= 30;
+        hp -= points;
     }
     @Override
     public void seFatiguer() {
@@ -52,9 +51,18 @@ public class Magicien extends Personnages {
         degats *= ((Baton) armeUtilisee).getAge();
         seFatiguer();
     }
-    // Vérifiez si le magicien est confirmé 
-    if (conf==true) {
-        degats /= 2;
+    // Vérifiez si la cible magicien est confirmé 
+    if (cible instanceof Magicien) {
+        if (((Magicien) cible).conf==true){
+            degats /= 2;
+        }
+    }
+    //verifie si la cible guerrier est confirmé
+    if (cible instanceof Guerrier){
+        if (((Guerrier)cible).cheval==true){
+            degats /= 2;
+        }
+            
     }
 
     // Appliquez les dégâts à la cible
