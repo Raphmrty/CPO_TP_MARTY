@@ -10,7 +10,7 @@ import java.util.Random;
  * @author marty
  */
 public class GrilleDeCellules {
-     int nbLignes;
+    int nbLignes;
     int nbColonnes;
     CelluleLumineuse[][] matriceCellules = new CelluleLumineuse[nbLignes][nbColonnes];
     private Random randomGenerator=new Random();
@@ -29,15 +29,7 @@ public class GrilleDeCellules {
         }
     }
     
-    public void genererNouvelleMatriceCellulesLumineuses(int nbLignes,int nbColonnes ) {
-        matriceCellules = new CelluleLumineuse[this.nbLignes][this.nbColonnes];
-        // Initialisation des cellules dans la grille
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                matriceCellules[i][j] = new CelluleLumineuse();
-            }
-        }
-    }
+    
     
     // Méthode pour éteindre toutes les cellules de la grille
     public void eteindreToutesLesCellules() {
@@ -130,19 +122,72 @@ public class GrilleDeCellules {
         // Si toutes les cellules sont éteintes, retourne true
         return true;
     }
+    
+    // Méthode pour obtenir le nombre de lignes de la grille
+    public int getNbLignes() {
+        return nbLignes;
+    }
 
+    // Méthode pour obtenir le nombre de colonnes de la grille
+    public int getNbColonnes() {
+        return nbColonnes;
+    }
+
+    // Redéfinition de la méthode toString pour afficher l'état de la grille de manière organisée
     @Override
     public String toString() {
-        String grille;
-        String ligne;
-        String interligne;
-        for (int i = 0; i < nbLignes; i++) {
-            
-            
+        String grilleString = "";
+
+        // Ajouter des indices de colonnes en haut de la grille
+        grilleString += "   | ";
+        for (int j = 0; j < nbColonnes; j++) {
+            grilleString += "" + j + " | ";
         }
+        grilleString += "\n";
+
+        // Ligne de séparation
+        
+        for (int j = 0; j < (nbColonnes+1); j++) {
+            grilleString += "----";
+        }
+        grilleString += "\n";
+
+        // Parcourir la grille et ajouter les indices de lignes et les états des cellules
+        for (int i = 0; i < nbLignes; i++) {
+            grilleString += " " + i + " |"; // Ajouter l'indice de ligne
+            for (int j = 0; j < nbColonnes; j++) {
+                // Centrer les caractères "X" et "O" dans chaque cellule
+                grilleString += "" + matriceCellules[i][j] + "|";
+            }
+            grilleString += "\n";
+
+            // Ligne de séparation
+            
+            for (int j = 0; j < (nbColonnes+1); j++) {
+                grilleString += "----";
+            }
+            grilleString += "\n";
+        }
+
+        return grilleString;
     }
+
     
 }
+
+
+
+
+  
+
+
+
+
+
+
+
+    
+
 
     
     

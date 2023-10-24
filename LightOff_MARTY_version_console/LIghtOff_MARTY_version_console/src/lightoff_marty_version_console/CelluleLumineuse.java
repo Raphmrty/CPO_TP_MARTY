@@ -12,7 +12,7 @@ public class CelluleLumineuse {
     private boolean etat = false;
 
     public CelluleLumineuse() {
-        this.etat = false;
+        this.etat = true;
     }
     
     public void activerCellule() {

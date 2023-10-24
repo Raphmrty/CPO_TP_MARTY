@@ -17,3 +17,4 @@ public interface etreVivant {
     boolean estVivant();
     void estAttaque(int points);
 }
+
