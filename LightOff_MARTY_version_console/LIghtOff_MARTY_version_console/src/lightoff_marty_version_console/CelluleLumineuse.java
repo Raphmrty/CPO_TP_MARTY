@@ -11,8 +11,8 @@ package lightoff_marty_version_console;
 public class CelluleLumineuse {
     private boolean etat = false;
 
-    public CelluleLumineuse(boolean etat) {
-        this.etat = etat;
+    public CelluleLumineuse() {
+        this.etat = false;
     }
     
     public void activerCellule() {

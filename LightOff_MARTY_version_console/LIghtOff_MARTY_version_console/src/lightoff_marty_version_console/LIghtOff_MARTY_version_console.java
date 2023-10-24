@@ -14,7 +14,13 @@ public class LIghtOff_MARTY_version_console {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+       GrilleDeCellules grille = new GrilleDeCellules(5, 5);
+       grille.genererMatriceAleatoire(100);
+       for (int i=0;i<grille.nbLignes;++i){
+           for (int j=0;j<grille.nbColonnes;++j){
+               System.out.println(grille.matriceCellules[i][j]);
+           }
+       }
     }
     
 }
