@@ -6,7 +6,7 @@ package lightoff_marty_version_console;
 import java.util.Scanner;
 
 /**
- *
+ * classe Partie, elle permet de générer une grille 
  * @author marty
  */
 public class Partie {
@@ -18,6 +18,7 @@ public class Partie {
     public Partie() {
         // Crée une nouvelle instance de la grille de cellules lumineuses
         grille = new GrilleDeCellules(6,6);
+        
         
         // Initialise le compteur de coups à zéro
         nbCoups = 0;
