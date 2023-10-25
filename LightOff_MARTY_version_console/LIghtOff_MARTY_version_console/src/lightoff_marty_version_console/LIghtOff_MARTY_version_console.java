@@ -5,8 +5,12 @@
 package lightoff_marty_version_console;
 
 /**
- *
+ * groupe : TDC
+ * Nom : MARTY
  * @author marty
+ * rôle du programme : création du jeu LightOff
+ * Date : 25/10/23
+ * 
  */
 public class LIghtOff_MARTY_version_console {
 
@@ -14,6 +18,11 @@ public class LIghtOff_MARTY_version_console {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //CelluleLumineuse cel = new CelluleLumineuse();
+        //cel.activerCellule();
+        //cel.estEteint();
+        //cel.eteindreCellule();
+        //System.out.println(cel);
        //GrilleDeCellules grille = new GrilleDeCellules(7, 7);
        //grille.genererMatriceAleatoire(100);
        //for (int i=0;i<grille.nbLignes;++i){
@@ -22,8 +31,8 @@ public class LIghtOff_MARTY_version_console {
            //}
        //}
         //System.out.println(grille);
-         Partie partie = new Partie();
-        partie.lancerPartie();
+         //Partie partie = new Partie();
+       // partie.lancerPartie();
     }
     } 
    
