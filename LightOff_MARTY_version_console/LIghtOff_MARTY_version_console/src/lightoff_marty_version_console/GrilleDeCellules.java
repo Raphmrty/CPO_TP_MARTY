@@ -14,7 +14,7 @@ public class GrilleDeCellules {
     int nbLignes;
     int nbColonnes;
     CelluleLumineuse[][] matriceCellules = new CelluleLumineuse[nbLignes][nbColonnes];
-    private Random randomGenerator=new Random();
+    private Random randomGenerator = new Random();
 
    
 
@@ -28,7 +28,7 @@ public class GrilleDeCellules {
         this.nbColonnes = nbColonnes;
         matriceCellules = new CelluleLumineuse[nbLignes][nbColonnes];
 
-        // Initialisation des cellules dans la grille
+        // Initialisation des cellules dans la grille, le double for permet de traiter chaque cellule de la matrice.
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 matriceCellules[i][j] = new CelluleLumineuse(); // création d'un nouvel objet grille
@@ -37,7 +37,7 @@ public class GrilleDeCellules {
     }
     
     
-    
+  
      
 
     /**
@@ -46,7 +46,7 @@ public class GrilleDeCellules {
     public void eteindreToutesLesCellules() {
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                matriceCellules[i][j].eteindreCellule();
+                matriceCellules[i][j].eteindreCellule(); // eteint toutes les cellules grâce à la méthode de la classe CelluleLumineuse.
             }
         }
     }     
@@ -56,7 +56,7 @@ public class GrilleDeCellules {
      * Méthode pour activer de manière aléatoire une ligne, une colonne ou une diagonale
      */
     public void activerLigneColonneOuDiagonaleAleatoire() {
-        int randomAction = randomGenerator.nextInt(3); // Génère un nombre aléatoire entre 0 et 2
+        int randomAction = randomGenerator.nextInt(4); // Génère un nombre aléatoire entre 0 et 2
 
         switch (randomAction) {
             case 0:
@@ -79,6 +79,11 @@ public class GrilleDeCellules {
                     matriceCellules[i][i].activerCellule();
                 }
                 break;
+            case 3:
+                //Activer une diagonale (de bas à gauche à bas à droite)
+                for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
+                matriceCellules[i][nbColonnes - i - 1].activerCellule();
+            }
         }
     }
 
@@ -88,7 +93,7 @@ public class GrilleDeCellules {
 
      * @param nbTours, il s'agit d'un entier saisie par l'utilisateur, qui mélange autant de fois la grille que ce nombre choisi.
      */
-    public void genererMatriceAleatoire(int nbTours) {
+    public void melangerMatriceAleatoirement(int nbTours) {
         // Éteindre toutes les cellules
         eteindreToutesLesCellules();
 
@@ -134,7 +139,7 @@ public class GrilleDeCellules {
      */
     public void activerDiagonaleDescendante() {
         // Activer une diagonale (de haut à gauche à bas à droite)
-            for (int i = 0; i <  nbColonnes; i++) {
+            for (int i = 0; i < Math.min(nbLignes,nbColonnes) ; i++) {
                 matriceCellules[i][i].activerCellule();
             }
     }
@@ -145,7 +150,7 @@ public class GrilleDeCellules {
      */
     public void activerDiagonaleMontante() {
         // Activer une diagonale (de bas à gauche à haut à droite)
-            for (int i = 0; i <  nbColonnes; i++) {
+            for (int i = 0; i < Math.min(nbLignes,nbColonnes) ; i++) {
                 matriceCellules[i][nbColonnes - i - 1].activerCellule();
             }
         
