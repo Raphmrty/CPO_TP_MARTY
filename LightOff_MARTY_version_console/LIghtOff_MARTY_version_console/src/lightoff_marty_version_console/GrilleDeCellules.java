@@ -95,11 +95,11 @@ public class GrilleDeCellules {
      */
     public void melangerMatriceAleatoirement(int nbTours) {
         // Éteindre toutes les cellules
-        eteindreToutesLesCellules();
+        this.eteindreToutesLesCellules();
 
         // Générer le plateau de manière aléatoire sur le nombre de tours spécifié
         for (int tour = 0; tour < nbTours; tour++) {
-            activerLigneColonneOuDiagonaleAleatoire();
+            this.activerLigneColonneOuDiagonaleAleatoire();
         }
     }
     
