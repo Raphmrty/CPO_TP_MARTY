@@ -56,7 +56,7 @@ public class GrilleDeCellules {
      * Méthode pour activer de manière aléatoire une ligne, une colonne ou une diagonale
      */
     public void activerLigneColonneOuDiagonaleAleatoire() {
-        int randomAction = randomGenerator.nextInt(4); // Génère un nombre aléatoire entre 0 et 2
+        int randomAction = randomGenerator.nextInt(4); // Génère un nombre aléatoire entre 0 et 3
 
         switch (randomAction) {
             case 0:

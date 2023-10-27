@@ -4,6 +4,7 @@
  */
 package lightoff_marty_version_console;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * classe Partie, elle permet de jouer et de faire participer le joueur sur la grille, via le système de Scanner
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class Partie {
     private GrilleDeCellules grille;
     private int nbCoups;
+    
     
     /**
      * Cette méthode crée une nouvelle instance de la grille de cellules lumineuses 
@@ -45,12 +47,58 @@ public class Partie {
      */
     public void lancerPartie() {
     Scanner sc = new Scanner(System.in);
+    Random randomGenerator = new Random();
     System.out.println("Bienvenue dans le jeu LightOff!"); //phrase d'accueil pour le joueur
+    System.out.println("Choisissez un niveau de difficulte :");
+        System.out.println("1. Facile (matrice 2x2, 3x3, ou 4X4; tentatives illimitees) ");
+        System.out.println("2. Normal (matrice 5X5, 6X6, 7X7; tentatives limitees a 30) ");
+        System.out.println("3. Difficile (matrice 7X7 ou non carrees, tentatives limitees a 20)" );
+        int choixDifficulte = sc.nextInt();
+        int nombreMaxTentatives = 10000; // Par défaut, pas de limite de tentatives
+        if (choixDifficulte == 1) {
+            int choixfacile = randomGenerator.nextInt(3); // Génère un nombre aléatoire entre 0 et 2
+            if (choixfacile == 0) {
+                grille = new GrilleDeCellules(2,2); // génère une matrice 2X2
+            }
+            else if (choixfacile == 1) {
+                grille = new GrilleDeCellules(3,3); // génère une matrice 3X3
+            }
+            else  {
+                grille = new GrilleDeCellules(4,4); // génère une matrice 4X4
+            }
+            nombreMaxTentatives = 10000; // nombre de tentavites illimitées.
+        }
+        else if (choixDifficulte == 2) {
+            int choixnormal = randomGenerator.nextInt(3); // Génère un nombre aléatoire entre 0 et 2
+            if (choixnormal == 0) {
+                grille = new GrilleDeCellules(5,5); // génère une matrice 5X5   
+            }
+            else if (choixnormal == 1) {
+                grille = new GrilleDeCellules(6,6); // génère une matrice 6X6
+            }
+            else  {
+                grille = new GrilleDeCellules(7,7); // génère une matrice 7X7
+            }
+            nombreMaxTentatives = 30; // fixe le nombre de tentatives à 30 coups.
+        }
+        else if (choixDifficulte == 3) {
+            int choixdifficile = randomGenerator.nextInt(2); // Génère un nombre aléatoire entre 0 et 1
+            int lineAlea = randomGenerator.nextInt(7);
+            int colAlea = randomGenerator.nextInt(7);
+            if (choixdifficile == 0) {
+                grille = new GrilleDeCellules(7,7);
+            }
+            else {
+                grille = new GrilleDeCellules(lineAlea,colAlea);
+            }
+            nombreMaxTentatives = 20; // fixe le nombre de tentatives à 20 coups.
+        }
     initialiserPartie(); // appel de la méthode initialiserPartie() pour mélanger la grille créée.
     // Tant que la grille n'est pas entièrement éteinte, la partie n'est pas terminée.
     while (!grille.cellulesToutesEteintes()) {
         System.out.println("Etat actuel de la grille :"); // l'état de la grille est continuellement affiché au joueur pour voir son avancement dans le jeu et opter pour telle ou telle stragégie de résolution.
         System.out.println(grille); // affiche la grille de jeu
+        System.out.println("Le nombre de tentatives restant est :" + nombreMaxTentatives);
 
         // Demander au joueur de choisir une action entre modification de : ligne, colonne , diagonale montante ou descendante.
         System.out.print("""
@@ -59,7 +107,7 @@ public class Partie {
         String choix = sc.next(); // permet d'intéragir avec le joueur.
         // Conditions sur le chiffre compris entre 1 et 4, correspondant à la modifaction choisie par joueur.
         if (choix.equals("1")) {
-            System.out.print("Veuillez entrer la ligne à activer (0-" + (grille.getNbLignes() - 1) + ") : ");
+            System.out.print("Veuillez entrer la ligne a activer (0-" + (grille.getNbLignes() - 1) + ") : ");
             int num = sc.nextInt();
             if (num >= 0 && num < grille.getNbLignes()) {
                 grille.activerLigneDeCellules(num);
@@ -67,7 +115,7 @@ public class Partie {
                 System.out.println("Choix de ligne invalide. Veuillez entrer une ligne valide."); // message d'erreur affiché au cas où le joueur saisie une valeur incohérente. 
             }
         } else if (choix.equals("2")) {
-            System.out.print("Veuillez entrer la colonne à activer (0-" + (grille.getNbColonnes() - 1) + ") : ");
+            System.out.print("Veuillez entrer la colonne a activer (0-" + (grille.getNbColonnes() - 1) + ") : ");
             int col = sc.nextInt();
             if (col >= 0 && col < grille.getNbColonnes()) {
                 grille.activerColonneDeCellules(col);
@@ -81,17 +129,21 @@ public class Partie {
         } else {
             System.out.println("Choix invalide. Veuillez entrer une option valide (1, 2, 3 ou 4)."); // message d'erreur affiché au cas où le joueur saisie une valeur incohérente.
         }
-
-        nbCoups++; // le nombre de coup est incrémenté de +1 à chaque tour.
+        if (choixDifficulte==1) {
+            nbCoups++; // le nombre de coup est incrémenté de +1 à chaque tour.
+        }
+        else {
+            nbCoups++;
+            nombreMaxTentatives--;
+            if (nombreMaxTentatives == 0){
+                System.out.println("Vous avez épuisé toutes vos tentatives. Veuillez reessayer");
+            }
+        }
     }
 
-    System.out.println("Félicitations! Vous avez éteint toutes les cellules en " + nbCoups + " coups."); // phrase de fin de jeu + le nombre de coups mis par le joueur pour finir sa partie.
+    System.out.println("Felicitations! Vous avez eteint toutes les cellules en " + nbCoups + " coups."); // phrase de fin de jeu + le nombre de coups mis par le joueur pour finir sa partie.
     sc.close();
-}
-
-
-   
-       
+    }       
 }
 
 
