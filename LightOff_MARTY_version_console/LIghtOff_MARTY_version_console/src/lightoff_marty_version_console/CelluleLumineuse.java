@@ -4,82 +4,111 @@
  */
 package lightoff_marty_version_console;
 
+import java.util.Random;
+
 /**
  *
  * @author marty
  * Rôle du programme : classe CelluleLumineuse, son rôle est de gérer l'état des cellules de la grille de jeu.
  */
 public class CelluleLumineuse {
-    private boolean etat = false;
-
+    public static Random rand = new Random();
+    private int etat;
+    /*
+    * etat est désormais un entier compris entre 0 et 2:
+    * 0 est équivalent à l'ancien "false", est à dire éteint ; 1 est équivalent à l'ancien "true" c'est à dire allumé; 2 est un etat intermédiaire, "semi-allumé"
+     */
+    
+    
     /**
-     * Initialisation de l'état des cellules à l'état eteint.
+     * Lorsque une cellule est créée son état vaut par défaut 0 qui correspond à une cellule éteinte, elle pourra prendre deux autres états différents.
      */
     public CelluleLumineuse() {
-        this.etat = false;
+        etat = 0;
     }
     
     /**
-     * Cette méthode permet d'inverser l'état actuel de la cellule, si elles téteinte, elle devient allumée, et inversement.
+     * Change l'état d'une cellule
+     * Depend du niveau de difficulté:
+     * -Facile (1) : l'état reste soit allumé, soit éteint
+     * -Normale(2) ou difficile (3) : l'état prend une valeur aléatoire entre 
+     * 0 et 2, il peut donc être éteint, allumé ou intermédaire.
      */
     public void activerCellule() {
-        if(etat==false) {
-            etat=true;
-        }
-        else if (etat==true) {
-            etat=false;
+        if (Partie.nivDifficult()==1) { // la méthode nivDifficult() prend trois valeurs possibles, 1 = facile ; 2 = normal ; 3 = difficile
+            if (etat == 0) {
+                etat = 1;
+            } else {
+                etat = 0;
+            }
+        } else {
+            switch (etat) {
+                case 0:
+                    etat=rand.nextInt(1, 3);
+                    break;
+                case 2:
+                    etat=rand.nextInt(1);
+                    break;
+                default:
+                    while(etat==1){
+                        etat=rand.nextInt(3);
+                    break;
+                    }
+            }
         }
     }
-
     /**
-     * Cette méthode permet d'éteindre une cellule si elle est éteinte.
+     *
+     * @return Retourne l'état actuel de la cellule
+     */
+    public int getEtat() {
+        return etat;
+    }
+    
+    /**
+     * Change l'état de la cellule en 0/=éteint
      */
     public void eteindreCellule() {
-        if (etat==true) {
-            etat = false;
-        }
-        else {
-            etat=false;
+        if(etat!=0){
+            etat=0;
         }
     }
-
+    
     /**
-     * Cette méthode permet de vérifier si la cellule est actuellement éteinte, la méthode est donc booléenne elle retourne true ou false.
-     * @return
+     * Verifie que l'état de la cellule vaut "0"
+     *
+     * @return Renvoie "true" si l'état est 0 et "false" sinon
      */
     public boolean estEteint() {
-        if (etat==false) {
-            return true;
-        }
-        else {
+        if (etat != 0) {
             return false;
-        }
-    }
-
-    /**
-     * Cette méthode renvoie l'état actuel de la cellule, c'est une méthode booléenne, elle renvoie true si la cellule est allumée et false si la cellule est éteinte
-     * @return
-     */
-    public boolean getEtat() {
-        if (etat==true) {
-            return true;
         } else {
-            return false;
+            return true;
         }
     }
-
-    /**
-     * Cette méthode affiche "X" si la cellule est allumée et "O" si la cellule est éteinte.
-     * @return
+    
+     /**
+     * Cette méthode permet d'attribuer à chaque état un signe distinctif dans la grille affichée dans la console.
+     *
+     * @return Retourne "0" si son état = 0, "X" si son état = 1, ou "#" si 
+     * son état = 2
      */
     @Override
     public String toString() {
-        if (etat==true) {
-            return " X ";
-        }else {
-            return " O ";
+        switch (this.etat) {
+            case 0:
+                return " O ";
+            case 1:
+                return " X ";
+            default:
+                return " # ";
         }
-        
     }
-    
+
+
 }
+
+
+
+
+

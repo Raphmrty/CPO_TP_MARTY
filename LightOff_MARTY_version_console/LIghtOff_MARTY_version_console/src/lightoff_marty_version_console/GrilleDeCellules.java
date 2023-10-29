@@ -15,7 +15,11 @@ public class GrilleDeCellules {
     int nbColonnes;
     CelluleLumineuse[][] matriceCellules = new CelluleLumineuse[nbLignes][nbColonnes];
     private Random randomGenerator = new Random();
-
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN
+    public static final String YELLOW = "\033[0;33m";  // YELLOW
+    public static final String BLUE = "\033[0;34m";    // BLUE
+    public static final String ANSI_RESET = "\u001B[0m"; 
    
 
     /**
@@ -102,7 +106,38 @@ public class GrilleDeCellules {
             this.activerLigneColonneOuDiagonaleAleatoire();
         }
     }
+
+    /**
+     * Cette méthode permet de creer une matrice avec un nombre de ligne et de colonne aléatoire compris entre 1 et 8.
+     */
+    public void CreerMatriceNonCarrees() {
+    Random randomGenerator = new Random();
     
+    // Générez aléatoirement le nombre de lignes et de colonnes entre 1 et 8
+    nbLignes = randomGenerator.nextInt(8) + 1;
+    nbColonnes = randomGenerator.nextInt(8) + 1;
+
+    // Créez une nouvelle matrice de cellules lumineuses
+    matriceCellules = new CelluleLumineuse[nbLignes][nbColonnes];
+
+    // Initialisez la matrice avec des cellules éteintes
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            matriceCellules[i][j] = new CelluleLumineuse();
+        }
+    }
+
+    // Générez un nombre aléatoire de cellules à activer
+    int nombreCellulesAActiver = randomGenerator.nextInt(nbLignes * nbColonnes) + 1;
+
+    for (int k = 0; k < nombreCellulesAActiver; k++) {
+        int ligneAlea = randomGenerator.nextInt(nbLignes);
+        int colonneAlea = randomGenerator.nextInt(nbColonnes);
+        matriceCellules[ligneAlea][colonneAlea].activerCellule();
+    }
+}
+
+
     
 
     /**
@@ -165,7 +200,7 @@ public class GrilleDeCellules {
     public boolean cellulesToutesEteintes() {
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                if (matriceCellules[i][j].getEtat()) {
+                if (matriceCellules[i][j].estEteint()==false) {
                     // S'il y a au moins une cellule allumée, retourne false
                     return false;
                 }
@@ -227,7 +262,17 @@ public class GrilleDeCellules {
             grilleString += " " + i + " |"; // Ajouter l'indice de ligne
             for (int j = 0; j < nbColonnes; j++) {
                 // Centrer les caractères "X" et "O" dans chaque cellule
-                grilleString += "" + matriceCellules[i][j] + "|";
+                    
+                    if(matriceCellules[i][j].getEtat()==0) {
+                        grilleString+=RED+"" + matriceCellules[i][j]+ ""+ANSI_RESET;
+                    }
+                    if(matriceCellules[i][j].getEtat()==1) {
+                        grilleString +=GREEN+"" + matriceCellules[i][j]+""+ANSI_RESET;
+                    }
+                    if(matriceCellules[i][j].getEtat()==2) {
+                        grilleString +=YELLOW+"" + matriceCellules[i][j]+""+ANSI_RESET;
+                    }
+                grilleString += "|";
             }
             grilleString += "\n";
 

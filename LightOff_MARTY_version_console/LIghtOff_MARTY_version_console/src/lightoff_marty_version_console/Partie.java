@@ -13,8 +13,9 @@ import java.util.Random;
 public class Partie {
     private GrilleDeCellules grille;
     private int nbCoups;
+    private static int niveau=0;
     
-    
+   
     /**
      * Cette méthode crée une nouvelle instance de la grille de cellules lumineuses 
      * et initialise le nombre de coups que le joueur met pour eteindre la grille entièrement à 0.
@@ -35,9 +36,79 @@ public class Partie {
     public void initialiserPartie() {
         this.grille.melangerMatriceAleatoirement(15);
     }
-    
-    // Méthode pour lancer la partie
+    /**
+     * Cette méthode permet au joueur lorsqu'il lance sa partie de pourvoir jouer avec des règles très simples pour prendre ses repères sur le jeu.
+     */
+    void choisirNiveauFacile() {
+    Random randomGenerator = new Random();
+    int choixfacile = randomGenerator.nextInt(3);
 
+        switch (choixfacile) {
+            case 0:
+                grille = new GrilleDeCellules(2, 2);
+                break;
+            case 1:
+                grille = new GrilleDeCellules(3, 3);
+                break;
+            default:
+                grille = new GrilleDeCellules(4, 4);
+                break;
+        }
+        niveau=1;
+    }
+    /**
+     * Cette méthode permet au joueur de rencontrer certaines difficultées dans sa partie, la taille de la matrice est plus grande et les tentatives sont limitées à 30.
+     */
+    private void choisirNiveauMoyen() {
+    Random randomGenerator = new Random();
+    int choixmoyen = randomGenerator.nextInt(3); 
+        
+        switch (choixmoyen) {
+            case 0:
+                grille = new GrilleDeCellules(5,5); // génère une matrice 5X5   
+                break;
+            case 1:
+                grille = new GrilleDeCellules(6,6); // génère une matrice 6X6
+                break;
+            default:
+                grille = new GrilleDeCellules(7,7); // génère une matrice 7X7
+                break;
+        }
+        niveau=2;
+    }
+    /**
+     * Cette méthode permet au joueur de jouer avec un niveau de difficulté élevé, il peut avoir une matrice 7X7, ou bien une matrice non carrée avec un nommbre de colonne et de ligne compris entre 6 et 8.
+     * Le nombre de tentatives est limité à 20.
+     */
+    private void choisirNiveauDifficile() {
+    Random randomGenerator = new Random();    
+    int choixdifficile = randomGenerator.nextInt(2); // Génère un nombre aléatoire entre 0 et 1
+    int lineAlea;
+    int colAlea;
+        switch (choixdifficile) {
+            case 0:
+                grille = new GrilleDeCellules(7,7);
+                break;
+            default:
+                do {
+                    lineAlea = randomGenerator.nextInt(8);
+                    colAlea = randomGenerator.nextInt(8);
+                    grille = new GrilleDeCellules(lineAlea,colAlea);
+                } while(lineAlea<6 && colAlea<6 && lineAlea>=8 && colAlea>=8); 
+                break;
+        }
+        niveau=3;
+    }
+
+    /**
+     * Cette méthode permet de retourner le niveau de difficulté de la partie
+     * @return le niveau de difficulté (facile (=1), normal(=2) ou difficile(=3)
+     */
+    public static int nivDifficult() {
+        return niveau;
+    }
+     
+    // Méthode pour lancer la partie
     /**
      * Cette méthode est le coeur du jeu, elle permet au joueur d'intéragir avec la console grâce au scanner.
      * Tant que la grille de cellules n'est pas complètement éteinte, la partie n'est pas terminée.
@@ -47,58 +118,33 @@ public class Partie {
      */
     public void lancerPartie() {
     Scanner sc = new Scanner(System.in);
-    Random randomGenerator = new Random();
     System.out.println("Bienvenue dans le jeu LightOff!"); //phrase d'accueil pour le joueur
     System.out.println("Choisissez un niveau de difficulte :");
         System.out.println("1. Facile (matrice 2x2, 3x3, ou 4X4; tentatives illimitees) ");
         System.out.println("2. Normal (matrice 5X5, 6X6, 7X7; tentatives limitees a 30) ");
         System.out.println("3. Difficile (matrice 7X7 ou non carrees, tentatives limitees a 20)" );
         int choixDifficulte = sc.nextInt();
-        int nombreMaxTentatives = 10000; // Par défaut, pas de limite de tentatives
-        if (choixDifficulte == 1) {
-            int choixfacile = randomGenerator.nextInt(3); // Génère un nombre aléatoire entre 0 et 2
-            if (choixfacile == 0) {
-                grille = new GrilleDeCellules(2,2); // génère une matrice 2X2
-            }
-            else if (choixfacile == 1) {
-                grille = new GrilleDeCellules(3,3); // génère une matrice 3X3
-            }
-            else  {
-                grille = new GrilleDeCellules(4,4); // génère une matrice 4X4
-            }
-            nombreMaxTentatives = 10000; // nombre de tentavites illimitées.
-        }
-        else if (choixDifficulte == 2) {
-            int choixnormal = randomGenerator.nextInt(3); // Génère un nombre aléatoire entre 0 et 2
-            if (choixnormal == 0) {
-                grille = new GrilleDeCellules(5,5); // génère une matrice 5X5   
-            }
-            else if (choixnormal == 1) {
-                grille = new GrilleDeCellules(6,6); // génère une matrice 6X6
-            }
-            else  {
-                grille = new GrilleDeCellules(7,7); // génère une matrice 7X7
-            }
-            nombreMaxTentatives = 30; // fixe le nombre de tentatives à 30 coups.
-        }
-        else if (choixDifficulte == 3) {
-            int choixdifficile = randomGenerator.nextInt(2); // Génère un nombre aléatoire entre 0 et 1
-            int lineAlea = randomGenerator.nextInt(7);
-            int colAlea = randomGenerator.nextInt(7);
-            if (choixdifficile == 0) {
-                grille = new GrilleDeCellules(7,7);
-            }
-            else {
-                grille = new GrilleDeCellules(lineAlea,colAlea);
-            }
-            nombreMaxTentatives = 20; // fixe le nombre de tentatives à 20 coups.
+        
+        switch (choixDifficulte) {
+            case 1:
+                choisirNiveauFacile();
+                break;
+            case 2:
+                choisirNiveauMoyen();
+                break;
+            case 3:
+                choisirNiveauDifficile();
+                break;
+            default:
+                break;
         }
     initialiserPartie(); // appel de la méthode initialiserPartie() pour mélanger la grille créée.
     // Tant que la grille n'est pas entièrement éteinte, la partie n'est pas terminée.
-    while (!grille.cellulesToutesEteintes()) {
+    int nombreMaxTentatives = (choixDifficulte == 2) ? 30 : (choixDifficulte == 3) ? 20 : Integer.MAX_VALUE;
+    while (!grille.cellulesToutesEteintes() && nombreMaxTentatives > 0) {
         System.out.println("Etat actuel de la grille :"); // l'état de la grille est continuellement affiché au joueur pour voir son avancement dans le jeu et opter pour telle ou telle stragégie de résolution.
         System.out.println(grille); // affiche la grille de jeu
-        System.out.println("Le nombre de tentatives restant est :" + nombreMaxTentatives);
+        
 
         // Demander au joueur de choisir une action entre modification de : ligne, colonne , diagonale montante ou descendante.
         System.out.print("""
@@ -135,8 +181,10 @@ public class Partie {
         else {
             nbCoups++;
             nombreMaxTentatives--;
+            System.out.println("Le nombre de tentatives restant est :" + nombreMaxTentatives);
             if (nombreMaxTentatives == 0){
                 System.out.println("Vous avez épuisé toutes vos tentatives. Veuillez reessayer");
+                break;
             }
         }
     }
@@ -145,6 +193,7 @@ public class Partie {
     sc.close();
     }       
 }
+
 
 
 

@@ -24,6 +24,7 @@ public class LIghtOff_MARTY_version_console {
         //cel.eteindreCellule();
         //System.out.println(cel);
        //GrilleDeCellules grille = new GrilleDeCellules(7, 7);
+       //grille.CreerMatriceNonCarrees();
        //grille.activerDiagonaleDescendante();
        //grille.activerDiagonaleMontante();
        //grille.activerLigneColonneOuDiagonaleAleatoire();
@@ -34,9 +35,10 @@ public class LIghtOff_MARTY_version_console {
                //System.out.println(grille.matriceCellules[i][j]);
            //}
        //}
-        //System.out.println(grille);
+       //System.out.println(grille);
         Partie partie = new Partie();
         partie.lancerPartie();
+        
     }
     } 
    
