@@ -38,6 +38,7 @@ public class Partie {
     }
     /**
      * Cette méthode permet au joueur lorsqu'il lance sa partie de pourvoir jouer avec des règles très simples pour prendre ses repères sur le jeu.
+     * La taille des grilles de jeu sont assez simples à résoudre (2X2, 3X3, 4X4) et le nombre de tentative est illimité.
      */
     void choisirNiveauFacile() {
     Random randomGenerator = new Random();
@@ -54,10 +55,10 @@ public class Partie {
                 grille = new GrilleDeCellules(4, 4);
                 break;
         }
-        niveau=1;
+        niveau=1; 
     }
     /**
-     * Cette méthode permet au joueur de rencontrer certaines difficultées dans sa partie, la taille de la matrice est plus grande et les tentatives sont limitées à 30.
+     * Cette méthode permet au joueur de rencontrer certaines difficultées dans sa partie, la taille de la matrice est plus grande(5X5, 6X6, 7X7) et les tentatives sont limitées à 30.
      */
     private void choisirNiveauMoyen() {
     Random randomGenerator = new Random();
@@ -77,8 +78,8 @@ public class Partie {
         niveau=2;
     }
     /**
-     * Cette méthode permet au joueur de jouer avec un niveau de difficulté élevé, il peut avoir une matrice 7X7, ou bien une matrice non carrée avec un nommbre de colonne et de ligne compris entre 6 et 8.
-     * Le nombre de tentatives est limité à 20.
+     * Cette méthode permet au joueur de jouer avec un niveau de difficulté élevé, il peut avoir une matrice 7X7, ou bien une matrice non carrée avec un nombre de colonne et de ligne compris entre 6 et 8.
+     * Le nombre de tentatives est limité à 20. L'appartition d'un nouvel état intermédiraire des cellules permet de varier les combinaisons et de rendre le jeu plus compliqué (CelluleLumineuse).
      */
     private void choisirNiveauDifficile() {
     Random randomGenerator = new Random();    
@@ -140,7 +141,7 @@ public class Partie {
         }
     initialiserPartie(); // appel de la méthode initialiserPartie() pour mélanger la grille créée.
     // Tant que la grille n'est pas entièrement éteinte, la partie n'est pas terminée.
-    int nombreMaxTentatives = (choixDifficulte == 2) ? 30 : (choixDifficulte == 3) ? 20 : Integer.MAX_VALUE;
+    int nombreMaxTentatives = (choixDifficulte == 2) ? 30 : (choixDifficulte == 3) ? 20 : Integer.MAX_VALUE; // nombre tentatives possibles selon le niveau de difficuulté de la partie.
     while (!grille.cellulesToutesEteintes() && nombreMaxTentatives > 0) {
         System.out.println("Etat actuel de la grille :"); // l'état de la grille est continuellement affiché au joueur pour voir son avancement dans le jeu et opter pour telle ou telle stragégie de résolution.
         System.out.println(grille); // affiche la grille de jeu
@@ -188,7 +189,7 @@ public class Partie {
             }
         }
     }
-
+    System.out.println(grille); // affiche la grille avec toutes les cellules éteintes.
     System.out.println("Felicitations! Vous avez eteint toutes les cellules en " + nbCoups + " coups."); // phrase de fin de jeu + le nombre de coups mis par le joueur pour finir sa partie.
     sc.close();
     }       

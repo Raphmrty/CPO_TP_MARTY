@@ -12,7 +12,7 @@ import java.util.Random;
  * Rôle du programme : classe CelluleLumineuse, son rôle est de gérer l'état des cellules de la grille de jeu.
  */
 public class CelluleLumineuse {
-    public static Random rand = new Random();
+    public static Random randomGenerator = new Random();
     private int etat;
     /*
     * etat est désormais un entier compris entre 0 et 2:
@@ -30,12 +30,12 @@ public class CelluleLumineuse {
     /**
      * Change l'état d'une cellule
      * Depend du niveau de difficulté:
-     * -Facile (1) : l'état reste soit allumé, soit éteint
-     * -Normale(2) ou difficile (3) : l'état prend une valeur aléatoire entre 
+     * Facile (1) ou Normal(2) : l'état reste soit allumé, soit éteint
+     * Difficile (3) : l'état prend une valeur aléatoire entre 
      * 0 et 2, il peut donc être éteint, allumé ou intermédaire.
      */
     public void activerCellule() {
-        if (Partie.nivDifficult()==1) { // la méthode nivDifficult() prend trois valeurs possibles, 1 = facile ; 2 = normal ; 3 = difficile
+        if (Partie.nivDifficult()==1 || Partie.nivDifficult()==2) { // la méthode nivDifficult() prend trois valeurs possibles, 1 = facile ; 2 = normal ; 3 = difficile
             if (etat == 0) {
                 etat = 1;
             } else {
@@ -44,14 +44,14 @@ public class CelluleLumineuse {
         } else {
             switch (etat) {
                 case 0:
-                    etat=rand.nextInt(1, 3);
+                    etat=randomGenerator.nextInt(1, 3);
                     break;
                 case 2:
-                    etat=rand.nextInt(1);
+                    etat=randomGenerator.nextInt(1);
                     break;
                 default:
                     while(etat==1){
-                        etat=rand.nextInt(3);
+                        etat=randomGenerator.nextInt(3);
                     break;
                     }
             }

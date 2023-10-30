@@ -57,7 +57,8 @@ public class GrilleDeCellules {
   
 
     /**
-     * Méthode pour activer de manière aléatoire une ligne, une colonne ou une diagonale
+     * Méthode pour activer de manière aléatoire une ligne, une colonne ou une diagonale.
+     * Un nombre aléatoire est généré entre 0 et 3 et chacun correspond à la modification d'une (ligne/colonne/diagonale) en particulier.
      */
     public void activerLigneColonneOuDiagonaleAleatoire() {
         int randomAction = randomGenerator.nextInt(4); // Génère un nombre aléatoire entre 0 et 3
@@ -244,47 +245,47 @@ public class GrilleDeCellules {
         String grilleString = "";
 
         // Ajouter des indices de colonnes en haut de la grille
-        grilleString += "   | ";
+        grilleString += BLUE + "   | " + ANSI_RESET; // barre de séparation bleue
         for (int j = 0; j < nbColonnes; j++) {
-            grilleString += "" + j + " | ";
+            grilleString += BLUE + "" + j + " | " + ANSI_RESET; // barre de séparation bleue
         }
-        grilleString += "\n";
+        grilleString += "\n"; // saut de ligne
 
         // Ligne de séparation
         
         for (int j = 0; j < (nbColonnes+1); j++) {
-            grilleString += "----";
+            grilleString += BLUE + "----" + ANSI_RESET; // interlignes bleus
         }
-        grilleString += "\n";
+        grilleString += "\n"; // saut de ligne
 
         // Parcourir la grille et ajouter les indices de lignes et les états des cellules
         for (int i = 0; i < nbLignes; i++) {
-            grilleString += " " + i + " |"; // Ajouter l'indice de ligne
+            grilleString += BLUE + " " + i + " |" + ANSI_RESET; // Ajouter l'indice de ligne
             for (int j = 0; j < nbColonnes; j++) {
-                // Centrer les caractères "X" et "O" dans chaque cellule
+                // Centrer les caractères "X" , "O"  et "#" dans chaque cellule
                     
                     if(matriceCellules[i][j].getEtat()==0) {
-                        grilleString+=RED+"" + matriceCellules[i][j]+ ""+ANSI_RESET;
+                        grilleString+=RED+"" + matriceCellules[i][j]+ ""+ANSI_RESET; // etat 0 = rouge
                     }
                     if(matriceCellules[i][j].getEtat()==1) {
-                        grilleString +=GREEN+"" + matriceCellules[i][j]+""+ANSI_RESET;
+                        grilleString +=GREEN+"" + matriceCellules[i][j]+""+ANSI_RESET; // etat 1 = vert
                     }
                     if(matriceCellules[i][j].getEtat()==2) {
-                        grilleString +=YELLOW+"" + matriceCellules[i][j]+""+ANSI_RESET;
+                        grilleString +=YELLOW+"" + matriceCellules[i][j]+""+ANSI_RESET; // etat 2 = jaune
                     }
-                grilleString += "|";
+                grilleString += BLUE + "|" + ANSI_RESET; // barres de séparation bleues
             }
-            grilleString += "\n";
+            grilleString += "\n"; // saut de ligne
 
             // Ligne de séparation
             
             for (int j = 0; j < (nbColonnes+1); j++) {
-                grilleString += "----";
+                grilleString += BLUE + "----" + ANSI_RESET; // interlignes bleus
             }
-            grilleString += "\n";
+            grilleString += "\n"; // saut de ligne
         }
 
-        return grilleString;
+        return grilleString; // retourne la grille
     }
 
     
