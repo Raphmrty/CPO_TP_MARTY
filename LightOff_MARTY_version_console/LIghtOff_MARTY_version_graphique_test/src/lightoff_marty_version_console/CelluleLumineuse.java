@@ -44,16 +44,15 @@ public class CelluleLumineuse {
         } else {
             switch (etat) {
                 case 0:
-                    etat=randomGenerator.nextInt(1, 3);
+                    etat=1;
                     break;
                 case 2:
-                    etat=randomGenerator.nextInt(1);
+                    etat=0;
                     break;
                 default:
-                    while(etat==1){
-                        etat=randomGenerator.nextInt(3);
+                     etat=2;
                     break;
-                    }
+                    
             }
         }
     }

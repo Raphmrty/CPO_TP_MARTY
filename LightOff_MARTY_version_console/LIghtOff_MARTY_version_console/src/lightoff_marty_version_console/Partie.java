@@ -11,9 +11,9 @@ import java.util.Random;
  * @author marty
  */
 public class Partie {
-    private GrilleDeCellules grille;
-    private int nbCoups;
-    private static int niveau=0;
+    public GrilleDeCellules grille;
+    public int nbCoups;
+    public static int niveau=0;
     
    
     /**
