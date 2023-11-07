@@ -40,7 +40,7 @@ public class Partie {
      * Cette méthode permet au joueur lorsqu'il lance sa partie de pourvoir jouer avec des règles très simples pour prendre ses repères sur le jeu.
      * La taille des grilles de jeu sont assez simples à résoudre (2X2, 3X3, 4X4) et le nombre de tentative est illimité.
      */
-    void choisirNiveauFacile() {
+    public void choisirNiveauFacile() {
     Random randomGenerator = new Random();
     int choixfacile = randomGenerator.nextInt(3);
 
@@ -60,7 +60,7 @@ public class Partie {
     /**
      * Cette méthode permet au joueur de rencontrer certaines difficultées dans sa partie, la taille de la matrice est plus grande(5X5, 6X6, 7X7) et les tentatives sont limitées à 30.
      */
-    private void choisirNiveauMoyen() {
+    public void choisirNiveauMoyen() {
     Random randomGenerator = new Random();
     int choixmoyen = randomGenerator.nextInt(3); 
         
@@ -81,7 +81,7 @@ public class Partie {
      * Cette méthode permet au joueur de jouer avec un niveau de difficulté élevé, il peut avoir une matrice 7X7, ou bien une matrice non carrée avec un nombre de colonne et de ligne compris entre 6 et 8.
      * Le nombre de tentatives est limité à 20. L'appartition d'un nouvel état intermédiraire des cellules permet de varier les combinaisons et de rendre le jeu plus compliqué (CelluleLumineuse).
      */
-    private void choisirNiveauDifficile() {
+    public void choisirNiveauDifficile() {
     Random randomGenerator = new Random();    
     int choixdifficile = randomGenerator.nextInt(2); // Génère un nombre aléatoire entre 0 et 1
     int lineAlea;

@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class CelluleLumineuse {
     public static Random randomGenerator = new Random();
-    private int etat;
+    public int etat;
     /*
     * etat est désormais un entier compris entre 0 et 2:
     * 0 est équivalent à l'ancien "false", est à dire éteint ; 1 est équivalent à l'ancien "true" c'est à dire allumé; 2 est un etat intermédiaire, "semi-allumé"

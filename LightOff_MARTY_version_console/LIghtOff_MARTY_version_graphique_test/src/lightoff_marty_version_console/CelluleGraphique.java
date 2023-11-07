@@ -4,6 +4,7 @@
  */
 package lightoff_marty_version_console;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JButton;
 
@@ -27,8 +28,16 @@ int hauteur) {
  // Methode gérant le dessin de la cellule 
  @Override
  protected void paintComponent(Graphics g) {
- super.paintComponent(g); 
- this.setText(celluleLumineuseAssociee.toString());
+ int w = this.getWidth();
+ int h = this.getHeight();
+ if (celluleLumineuseAssociee.etat == 0) {
+ g.setColor(Color.red);
+ } else if (celluleLumineuseAssociee.etat==1){
+ g.setColor(Color.yellow);
+ } else {
+ g.setColor(Color.green);
+ }
+ g.fillOval(2, 2, w - 4, h - 4);
  }
 
 }   
