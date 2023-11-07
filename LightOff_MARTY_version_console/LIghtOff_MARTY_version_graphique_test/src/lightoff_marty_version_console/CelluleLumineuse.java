@@ -96,11 +96,11 @@ public class CelluleLumineuse {
     public String toString() {
         switch (this.etat) {
             case 0:
-                return " O ";
+                return "O";
             case 1:
-                return " X ";
+                return "X";
             default:
-                return " # ";
+                return "#";
         }
     }
 
