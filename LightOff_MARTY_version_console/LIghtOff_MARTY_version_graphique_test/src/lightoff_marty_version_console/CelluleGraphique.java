@@ -35,7 +35,7 @@ int hauteur) {
  } else if (celluleLumineuseAssociee.etat==1){
  g.setColor(Color.yellow);
  } else {
- g.setColor(Color.green);
+ g.setColor(Color.orange);
  }
  g.fillOval(2, 2, w - 4, h - 4);
  }

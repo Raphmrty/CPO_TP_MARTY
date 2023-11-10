@@ -1,8 +1,10 @@
 package lightoff_marty_version_console;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.JButton;
 
 /*
@@ -16,33 +18,44 @@ import javax.swing.JButton;
 
 
 public class FenetrePrincipale extends javax.swing.JFrame {
-
+    
     GrilleDeCellules grille;
     int nbCoups;
     int i;
     
-  
+   
     
     /**
      * Creates new form FenetrePrincipale
      */
     public FenetrePrincipale() {
         initComponents();
-        int nbLignes = 8;
-        int nbColonnes = 8;
-        
-         
+        int nbLignes=5;
+        int nbColonnes=5;
          
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
-        initialiserPartie();
-        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36); // création d'un bouton
-                PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-            }
-        }
+       initialiserPartie();
+        afficherGrille();
         
+       
+        
+    }
+    
+   
+    
+
+    // Ajoutez cette méthode pour afficher la grille dans la fenêtre principale
+    void afficherGrille() {
+        int nbLignes = grille.getNbLignes();
+        int nbColonnes = grille.getNbColonnes();
+         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+
+        for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+            PanneauGrille.add(bouton_cellule);
+        }
+    }
         getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, nbColonnes * 40, nbLignes * 40));
         this.pack();
         this.revalidate();
@@ -68,6 +81,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
             };
             bouton_ligne.addActionListener(ecouteurClick);
             PanneauBoutonVerticaux.add(bouton_ligne);
+            nbCoups++;
 
         }
         PanneauBoutonHorizontaux.setLayout(new GridLayout(1, nbColonnes));
@@ -90,15 +104,20 @@ public class FenetrePrincipale extends javax.swing.JFrame {
             };
             bouton_colonne.addActionListener(ecouteurClick);
             PanneauBoutonHorizontaux.add(bouton_colonne);
+            nbCoups++;
 
         }
-
+        getContentPane().add(btnDiagM,new org.netbeans.lib.awtextra.AbsoluteConstraints(60,60+nbLignes*40,1*40,1*40));
+        getContentPane().add(btnDiagD,new org.netbeans.lib.awtextra.AbsoluteConstraints(60,10,1*40,1*40));
+         // Rafraîchir l'interface graphique après avoir ajouté les boutons
+    
     }
-
+    
     public void initialiserPartie() {
         grille.eteindreToutesLesCellules();
         grille.melangerMatriceAleatoirement(50);
     }
+    
     
      
 
@@ -135,6 +154,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 500, 500));
 
+        PanneauBoutonVerticaux.setBackground(new java.awt.Color(255, 102, 255));
+
         javax.swing.GroupLayout PanneauBoutonVerticauxLayout = new javax.swing.GroupLayout(PanneauBoutonVerticaux);
         PanneauBoutonVerticaux.setLayout(PanneauBoutonVerticauxLayout);
         PanneauBoutonVerticauxLayout.setHorizontalGroup(
@@ -147,6 +168,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         );
 
         getContentPane().add(PanneauBoutonVerticaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        PanneauBoutonHorizontaux.setBackground(new java.awt.Color(51, 255, 255));
 
         javax.swing.GroupLayout PanneauBoutonHorizontauxLayout = new javax.swing.GroupLayout(PanneauBoutonHorizontaux);
         PanneauBoutonHorizontaux.setLayout(PanneauBoutonHorizontauxLayout);
@@ -161,6 +184,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         getContentPane().add(PanneauBoutonHorizontaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
 
+        btnDiagD.setBackground(new java.awt.Color(0, 255, 51));
         btnDiagD.setText("DiagD");
         btnDiagD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +193,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         getContentPane().add(btnDiagD, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
+        btnDiagM.setBackground(new java.awt.Color(0, 255, 0));
         btnDiagM.setText("DiagM");
         btnDiagM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,8 +264,14 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
 public void FinDePartie() {
         if (this.grille.cellulesToutesEteintes() == true) {
+            PanneauGrille.setEnabled(false);
+            PanneauBoutonHorizontaux.setEnabled(false);
+            PanneauBoutonVerticaux.setEnabled(false);
             btnDiagM.setEnabled(false);
             btnDiagD.setEnabled(false);
+            FenetreVictoire f = new FenetreVictoire() ;
+            f.setVisible(true) ;
+            dispose();
             System.out.println("Bravo vous avez termine la partie en " + nbCoups + "coups");
         }
 
