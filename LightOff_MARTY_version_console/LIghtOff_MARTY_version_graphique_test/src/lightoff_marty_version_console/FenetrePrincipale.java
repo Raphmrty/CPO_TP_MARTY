@@ -21,7 +21,8 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     
     GrilleDeCellules grille;
     int nbCoups;
-    int i;
+    int i; 
+    
     
    
     
@@ -30,24 +31,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
      */
     public FenetrePrincipale() {
         initComponents();
-        int nbLignes=5;
-        int nbColonnes=5;
-         
-        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
-       initialiserPartie();
-        afficherGrille();
-        
-       
-        
-    }
+         int nbLignes=5;
+         int nbColonnes=5;
+         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+         // Ajoutez cette méthode pour afficher la grille dans la fenêtre principale
     
-   
-    
-
-    // Ajoutez cette méthode pour afficher la grille dans la fenêtre principale
-    void afficherGrille() {
-        int nbLignes = grille.getNbLignes();
-        int nbColonnes = grille.getNbColonnes();
          PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
 
         for (int i = 0; i < nbLignes; i++) {
@@ -110,9 +98,68 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         getContentPane().add(btnDiagM,new org.netbeans.lib.awtextra.AbsoluteConstraints(60,60+nbLignes*40,1*40,1*40));
         getContentPane().add(btnDiagD,new org.netbeans.lib.awtextra.AbsoluteConstraints(60,10,1*40,1*40));
          // Rafraîchir l'interface graphique après avoir ajouté les boutons
-    
+        
+        // Configurer le panneau de boutons de difficulté
+        PanneauBoutonsDifficulte.setLayout(new GridLayout(1, 3));
+
+        JButton boutonFacile = new JButton("Facile");
+        JButton boutonNormal = new JButton("Normal");
+        JButton boutonDifficile = new JButton("Difficile");
+        PanneauBoutonsDifficulte.add(boutonFacile);
+        PanneauBoutonsDifficulte.add(boutonNormal);
+        PanneauBoutonsDifficulte.add(boutonDifficile);
+
+        getContentPane().add(PanneauBoutonsDifficulte, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 3 * 80, 1 * 40));
+        this.pack();
+        this.revalidate();
+
+        boutonFacile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetrePrincipale f1 = new FenetrePrincipale();
+                grille = new GrilleDeCellules(4,4);
+                f1.setVisible(true);
+                dispose();
+                
+                
+            }
+        });
+
+        boutonNormal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetrePrincipale f2 = new FenetrePrincipale();
+                 grille = new GrilleDeCellules(5,5);
+                 f2.setVisible(true);
+                 dispose();
+                
+                
+            }
+        });
+
+        boutonDifficile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetrePrincipale f3 = new FenetrePrincipale();
+                 grille = new GrilleDeCellules(6,6);
+                 f3.setVisible(true);
+                 dispose();
+                
+                
+            }
+        });
+
+        
+        
+       initialiserPartie();
+        
+        
+       
+        
     }
     
+  
+     
     public void initialiserPartie() {
         grille.eteindreToutesLesCellules();
         grille.melangerMatriceAleatoirement(50);
@@ -135,6 +182,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         PanneauBoutonHorizontaux = new javax.swing.JPanel();
         btnDiagD = new javax.swing.JButton();
         btnDiagM = new javax.swing.JButton();
+        PanneauBoutonsDifficulte = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -202,6 +250,19 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         });
         getContentPane().add(btnDiagM, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
+        javax.swing.GroupLayout PanneauBoutonsDifficulteLayout = new javax.swing.GroupLayout(PanneauBoutonsDifficulte);
+        PanneauBoutonsDifficulte.setLayout(PanneauBoutonsDifficulteLayout);
+        PanneauBoutonsDifficulteLayout.setHorizontalGroup(
+            PanneauBoutonsDifficulteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        PanneauBoutonsDifficulteLayout.setVerticalGroup(
+            PanneauBoutonsDifficulteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(PanneauBoutonsDifficulte, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 610, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -257,6 +318,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanneauBoutonHorizontaux;
     private javax.swing.JPanel PanneauBoutonVerticaux;
+    private javax.swing.JPanel PanneauBoutonsDifficulte;
     private javax.swing.JPanel PanneauGrille;
     private javax.swing.JButton btnDiagD;
     private javax.swing.JButton btnDiagM;
@@ -267,6 +329,7 @@ public void FinDePartie() {
             PanneauGrille.setEnabled(false);
             PanneauBoutonHorizontaux.setEnabled(false);
             PanneauBoutonVerticaux.setEnabled(false);
+            PanneauBoutonsDifficulte.setEnabled(false);
             btnDiagM.setEnabled(false);
             btnDiagD.setEnabled(false);
             FenetreVictoire f = new FenetreVictoire() ;
