@@ -5,8 +5,12 @@
 package lightoff_marty_version_console;
 
 /**
- *
+ * groupe : TDC
+ * Nom : MARTY
  * @author marty
+ * rôle du programme : création d'une fenêtre en cas de victoire du joueur
+ * Date : 06/11/23
+ * 
  */
 public class FenetreVictoire extends javax.swing.JFrame {
 int nbCoups;
@@ -108,7 +112,7 @@ int nbCoups;
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitterpartieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterpartieActionPerformed
-        dispose();
+        dispose(); // si le joueur clique dessus, la fenêtre se ferme
     }//GEN-LAST:event_quitterpartieActionPerformed
 
     private void afficherrésultatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_afficherrésultatActionPerformed
@@ -116,7 +120,7 @@ int nbCoups;
     }//GEN-LAST:event_afficherrésultatActionPerformed
 
     private void playagainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playagainActionPerformed
-        FenetrePrincipale f = new FenetrePrincipale();
+        FenetrePrincipale f = new FenetrePrincipale(); // si le joueur clique sur ce bouton, une nouvelle partie commence
         f.setVisible(true);
         dispose();
     }//GEN-LAST:event_playagainActionPerformed
